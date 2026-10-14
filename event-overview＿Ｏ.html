@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>i住家｜熱門活動總覽</title>
+  <meta name="description" content="i住家熱門活動與優惠資訊總覽。">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; upgrade-insecure-requests;">
+  <meta http-equiv="X-Content-Type-Options" content="nosniff">
+  <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+  <link rel="stylesheet" href="./css/style.css">
+  <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+<body>
+  <header class="site-header" data-component="header"></header>
+  <main class="page">
+    <article class="article event-overview" aria-label="熱門活動總覽">
+      <h1 class="event-overview__heading">熱門活動總覽</h1>
+      <!-- 大廣告內容由js/hot-events.js控制 -->
+      <div class="event-overview__featured" id="overviewFeatured"></div>
+      <!-- 小廣告自動使用熱門活動剩餘清單 -->
+      <div class="event-overview__list" id="overviewList"></div>
+    </article>
+<aside class="sidebar" aria-label="活動資訊">
+
+    <!-- 熱門活動 -->
+    <section class="hot-news">
+        <input class="hot-news__toggle" type="checkbox"
+               id="hotNewsToggle" tabindex="-1">
+
+        <label class="hot-news__summary" for="hotNewsToggle">
+            <span>熱門活動</span>
+            <span class="hot-news__icon" aria-hidden="true"></span>
+        </label>
+
+        <h2 class="hot-news__title">熱門活動</h2>
+
+        <!-- 活動內容由共用JS自動產生 -->
+        <ol class="hot-news__list"></ol>
+    </section>
+
+    <!-- 最新公告 -->
+    <section class="hot-news latest-news" aria-label="最新公告">
+        <input class="hot-news__toggle" type="checkbox"
+               id="latestNewsToggle" tabindex="-1">
+
+        <label class="hot-news__summary" for="latestNewsToggle">
+            <span>最新公告</span>
+            <span class="hot-news__icon" aria-hidden="true"></span>
+        </label>
+
+        <h2 class="hot-news__title">最新公告</h2>
+
+        <!-- 公告內容由共用JS自動產生 -->
+        <ul class="hot-news__list latest-news__list"
+            id="latestAnnouncements"></ul>
+    </section>
+
+</aside>
+  </main>
+  <footer class="site-footer" data-component="footer"></footer>
+  <script src="./js/main.js" defer></script>
+  <script src="./js/hot-events.js" defer></script>
+</body>
+</html>

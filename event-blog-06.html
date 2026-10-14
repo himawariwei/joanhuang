@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    
+    <title>i住家|寄件回饋</title>
+    <meta name="description" content="uniopen App 新客限定好康券活動，完成綁定會員帳號即可參加天天抽活動。">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; style-src 'self'; font-src 'self'; script-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="icon" type="image/png" href="./images/logo.png">
+</head>
+
+<body>
+    <header class="site-header" data-component="header"></header>
+
+       <main class="page">
+<article class="article">
+
+    <a href="./event-overview.html" class="back-to-overview">
+        <span aria-hidden="true">←</span>
+        返回熱門活動總覽
+    </a>
+
+    <header class="article__header"><br>
+            <header class="article__header">
+                <h1>寄件享雙重十倍回饋</h1>
+                <h2>寄包裹送10+10點OPENPOINT點數</h2>
+                <p class="article__meta">【活動時間】2026/08/24~2026/10/27</p>
+            </header>
+
+            <figure class="article__cover">
+                <img src="./images/blog/blog-06.jpg" alt="" loading="eager" decoding="async">
+            </figure>
+
+            <section class="article__content" aria-label="活動內容">
+
+                <h2>【活動辦法】</h2>
+                <p>寄包裹也有好禮拿！<br> 活動期間內，透過 i住家完成包裹寄件預約並成功寄件，即可獲得10+10共計20點OPENPOINT點數，方便寄還能累積點數回饋。</p>
+            </section>
+
+            <section class="article-notice" aria-labelledby="noticeTitle">
+                <h2 id="noticeTitle">注意事項</h2>
+                <ul>
+                    <li>OPENPOINT點數回饋將依活動規範發送至綁定之uniopen會員帳號。</li>
+                    <li>如取消訂單、未完成寄件或不符合活動資格者，不得獲得活動回饋。</li>
+                    <li>活動內容及相關規範以活動頁面公告內容為準。</li>
+                </ul>
+            </section>
+
+            <section class="article-faq" aria-labelledby="faqTitle">
+                <h2 id="faqTitle">怎麼抽？怎麼領？怎麼用？</h2>
+
+                <div class="accordion">
+                    <details class="accordion__item">
+                        <summary>Q1：如何獲得OPENPOINT點數回饋？</summary>
+                        <div class="accordion__content">
+                            <p>A：活動期間成功完成寄件，單筆寄件訂單送10+10點OPENPOINT點數回饋。</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion__item">
+                        <summary>Q2：點數何時發放？</summary>
+                        <div class="accordion__content">
+                            <p>A：符合資格者將依活動規範發送至綁定之 uniopen 會員帳號，實際時間以活動公告為準。</p>
+                        </div>
+                    </details>
+
+                    <details class="accordion__item">
+                        <summary>Q3：取消寄件後還能獲得贈品或點數嗎？</summary>
+                        <div class="accordion__content">
+                            <p>A：不可以。取消訂單、未完成寄件或不符合活動資格者，不得獲得活動回饋。</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+        </article>
+
+        <aside class="sidebar" aria-label="活動資訊">
+            <!-- 熱門活動由 js/hot-events.js 統一管理 -->
+            <section class="hot-news">
+                <input class="hot-news__toggle" type="checkbox" id="hotNewsToggle" tabindex="-1">
+                <label class="hot-news__summary" for="hotNewsToggle"><span>熱門活動</span><span class="hot-news__icon" aria-hidden="true"></span></label>
+                <h2 class="hot-news__title">熱門活動</h2>
+                <ol class="hot-news__list"></ol>
+            </section>
+            <!-- 最新公告由 js/hot-events.js 統一管理 -->
+            <section class="hot-news latest-news" aria-label="最新公告">
+                <input class="hot-news__toggle" type="checkbox" id="latestNewsToggle" tabindex="-1">
+                <label class="hot-news__summary" for="latestNewsToggle"><span>最新公告</span><span class="hot-news__icon" aria-hidden="true"></span></label>
+                <h2 class="hot-news__title">最新公告</h2>
+                <ul class="hot-news__list latest-news__list" id="latestAnnouncements"></ul>
+            </section>
+        </aside>
+    </main>
+
+
+    <footer class="site-footer" data-component="footer"></footer>
+
+    <script src="./js/main.js" defer></script>
+    <script src="./js/hot-events.js" defer></script>
+</body>
+
+</html>
