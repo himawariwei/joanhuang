@@ -1,0 +1,803 @@
+PAGES=22
+
+===== PAGE 1 =====
+
+統一資訊股份有限公司
+i 住家官網
+https://inbr.pic.net.tw/
+滲透測試初測結果分析與建議報告
+V1.0版
+中華民國 115 年 08 月 21 日
+精誠軟體服務股份有限公司
+本文件係屬精誠軟體服務股份有限公司所有，非經同意不得將全部或部分內容揭露於第三人
+
+===== PAGE 2 =====
+
+文件制/修訂記錄
+版次 日期 說明 作者 修訂中 定稿
+1.0 2026/08/21 V1.0 Weishin Ho (CEH) V
+本文件係屬精誠軟體服務股份有限公司所有，非經同意不得將全部或部分內容揭露於第三人
+
+===== PAGE 3 =====
+
+滲透測試初測結果分析及建議
+報告
+【目錄】
+第壹章、 前言 ......................................................................................................................... 4
+一、目的 ............................................................................................................................... 4
+二、作業規範 ....................................................................................................................... 4
+三、測試範圍及時程 ........................................................................................................... 5
+第貳章、 執行步驟與項目 ..................................................................................................... 7
+一、執行流程 ....................................................................................................................... 7
+二、檢測項目與標準規範 ................................................................................................... 9
+第參章、 滲透測試作業執行結果報告 ............................................................................... 17
+一、滲透測試結果摘要 ..................................................................................................... 17
+二、風險弱點清單 ............................................................................................................. 18
+三、OWASP TOP10 – 2025對照表 .................................................................................... 19
+四、滲透測試詳細過程及內容 ......................................................................................... 20
+(一) HTTP 嚴格傳輸安全（HSTS）標頭未設定 .................................................... 20
+第肆章、 結論與建議 ........................................................................................................... 22
+- 3 -
+
+===== PAGE 4 =====
+
+滲透測試初測結果分析及建議
+報告
+第壹章、 前言
+一、目的
+滲透測試係利用系統化工具與流程，結合本公司資訊安全專家
+之專業知識、資訊安全技術及駭客工具，對於雙方所約定之目標系統
+進行安全強度測試及模擬駭客入侵，並提供客戶專屬測試報告及系統
+補強建議。
+本服務將由本團隊依循國際方法論進行檢查(OWASP Top Ten、
+OWASP Testing Guide)，配合 貴單位需求，以攻擊者的角度對受測目
+標系統進行安全非破壞性的滲透測試，並利用各種滲透技術、攻擊手
+法、弱點攻擊程式、網站漏洞等技巧，來找出駭客可能之入侵管道，
+並將於測試完成後提供專業之評估報告、改善建議及專業諮詢，協助
+貴單位做好各種資通安全防護措施。
+二、作業規範
+(一) 貴單位同意、授權且委託本團隊因執行本服務所需，須對 貴單
+位之網際網路資訊系統環境進行滲透測試安全檢測服務。
+(二) 於本服務中所獲得與蒐集之資訊，僅用來作為本服務執行之發
+現事項佐證資訊使用，不做其它用途之使用，且採取適當及必
+要之保護措施，不得在未經書面授權下洩露予第三者，或供非
+職務目的加以使用、拷貝、隱藏， 並得經 貴單位同意及簽訂
+保密切結書辦理
+(三) 其它保密事項之規範，遵循 貴我雙方所簽訂之專案合約規範
+及保密合約。
+- 4 -
+
+===== PAGE 5 =====
+
+滲透測試初測結果分析及建議
+報告
+三、測試範圍及時程
+作業項目 執行期間
+執行滲透測試 提交測試結果分析
+報告 執行時段
+開始日期 2026 年 08 月 19 日 2026 年 08 月 21 日 ■ 上班時段：星期一至星期五 AM 9:00 開始作業
+☐ 非上班時段：星期一至星期五 PM 6:00 開始作業
+☐ 夜間時段：星期一至星期五 PM11:00 開始作業
+☐ 假日：包含國定假日及星期六、星期日 AM 9:00 開始作業
+☐ 特定時段：
+項次 系統名稱 結束日期
+2026 年 08 月 20 日
+2026 年 08 月 21 日
+URL/IP 範圍與執行
+設備功能 / 用
+途 執行方式
+方式
+1 i住家官網 https://inbr.pic.net.tw/ i住家官網 ☑遠端
+2
+☐到場
+測試帳號
+帳號 密碼
+(測試完畢
+後由貴 公
+司協助刪
+除)
+目標數量 總計共 1 個IP/URL
+檢測工具 Burp Suite Professional v2026.7.3
+資安防護設備設定
+(1) 檢測來源 IP：59.120.3.59
+(2) 是否針對檢測來源 IP 設定防火牆規則開通：■是
+☐否
+(3) 是否針對檢測來源 IP 設定( 如：IPS/WAF
+/UTM)Bypass(不阻擋)：■是 ☐否
+其他配合需
+求
+雲服務、託管服務
+資安設定
+(1) 受測目標是否在雲服務？☐是 ■否 (如是，請接
+續(2))
+(2) 雲服務供應上（AWS、CGP 或 Azure 等）的服
+務條款中，進行滲透測試是否需要先申請？☐是
+☐否
+(3) 受測目標環境是否由其他MSSP廠商託管？☐是
+☐否(如是，請接續(4))
+- 5 -
+
+===== PAGE 6 =====
+
+滲透測試初測結果分析及建議
+報告
+(4) 安全服務託管提供商（MSSP）的服務條款中，
+進行滲透測試是否需要事先申請？☐是 ☐否
+備份與復原
+(1) 受測目標是否為較脆弱的系統，如易 Crash、版
+本較舊或未修補的系統？☐是 ■否
+(2) 貴司內部修復系統中斷的平均時間：
+_________
+(3) 貴司是否定期測試備份的可用性與完整性？☐是
+☐否
+(4) 貴司最後執行恢復備份的時間點：＿＿＿＿＿
+備註
+- 6 -
+
+===== PAGE 7 =====
+
+滲透測試初測結果分析及建議
+報告
+第貳章、 執行步驟與項目
+一、執行流程
+滲透測試流程圖圖示
+(一) 確認範圍：前置作業
+滲透測試開始前，滲透測試小組將事先與 貴單位承辦人員開
+會討論各項測試內容，說明整個作業流程，進行潛在風險溝通與
+需求訪談，以完成下方前置工作：
+(1) 定義工作範圍及項目
+(2) 確認測試時程及執行時間
+(3) 參與測試之系統、伺服器及人員數量
+(4) 評估現有網路環境架構以及確認其他特殊需求
+(5) 溝通潛在風險項目，提供檢測前建議安控措施
+(6) 取得正式滲透測試執行授權
+(二) 初測：執行滲透
+(1) 系統資訊蒐集
+透過搜尋引擎及資訊蒐集工具，蒐集客戶的公開資訊、開啟
+- 7 -
+
+===== PAGE 8 =====
+
+滲透測試初測結果分析及建議
+報告
+的通訊埠
+及服務、系統及軟體版本、網站架構等資訊，找出容易成為攻擊
+標靶的途徑所在。
+(2) 網站及系統弱點掃描
+根據客戶需求及蒐集資訊進行分析及評估，選擇各種適當
+之弱點掃描工具進行安全檢測，瞭解系統以及網頁程式的脆弱點
+所在，尤其針對目前最常發生的網頁及應用程式弱點，包含 Web
+程式碼與服務程式漏洞。
+(3) 利用自動化工具及專業人員進行測試
+本團隊資訊安全專家將利用各式資安檢測工具，密碼破解
+工具，以及專業知識，針對目標系統進行安全的入侵測試，以期
+找出系統管理者及程式設計者容易疏忽的系統、強度不足的密碼、
+網站應用程式與網站商業邏輯等安全漏洞。
+所測試對象除了伺服器外，也特別包含網頁及應用程式弱點
+檢測等重大系統漏洞，因為這些是屬於較常見的漏洞，也是容
+易被駭客利用的地方。此外，也會參考國際組織發佈的重要漏
+洞加以測試，各檢測項目請參照後續章節。
+(三) 結果討論：提交測試結果報告與建議
+本團隊將在測試結束後二週內提交中文化「滲透測試報告」，
+報告內容包含滲透過程中所發現之漏洞、風險統計、相關修補與建議措
+施等。另於 貴單位進行安全強化修補期間，視需求本團隊可協助提供相
+關技術諮詢服務。
+(四) 複測：執行複測作業
+於 貴單位系統及網站管理人員完成安全強化與修補作業
+後，建議經需求評估後執行滲透測試複測作業，以確保弱點及問
+題確實得到修補與改善。
+- 8 -
+
+===== PAGE 9 =====
+
+滲透測試初測結果分析及建議
+報告
+二、檢測項目與標準規範
+(一) 測試團隊執行滲透測試依循OWASP（Open Web Application Security
+Project）組織所規範OWASP Testing Guide v4.0之框架定義進行檢
+測，檢測項目如下表
+表1 OWASP Testing Guide v4.0 滲透測試規範項目
+OWASP 編號 測試項目 檢測項目說明
+資訊蒐集(Information Gathering)
+OTG-INFO-001
+OTG-INFO-002 Conduct Search Engine
+Discovery and Reconnaissance
+for Information Leakage
+Fingerprint Web Server 利用搜尋引擎查看是否有資訊洩
+漏。
+蒐集Webserver 伺服器版本與類
+型。
+OTG-INFO-003
+Review Webserver Metafiles
+for Information Leakage
+蒐集Webserver 的metafiles 看是否
+有敏感資訊洩漏。
+OTG-INFO-004 Enumerate Applications on
+Webserver
+蒐集Webserver 上的應用程式資
+訊。
+OTG-INFO-005
+檢視並蒐集Webpage 的註解與
+metadata。
+OTG-INFO-006 檢測網頁程式中，存在的滲透切
+入點。
+OTG-INFO-007 OTG-INFO-008 Review Webpage Comments
+and Metadata for Information
+Leakage
+Identify application entry
+points
+Map execution paths through
+application 蒐集目標程式的流程的資訊。
+Fingerprint Web Application
+測試Fingerprint 框架是否存在漏
+Framework
+洞。
+OTG-INFO-009 Fingerprint Web Application 蒐集web 應用程式和版本，看是
+否存在已知漏洞。
+OTG-INFO-010 Map Application Architecture 蒐集互相連接的應用程式架構的
+相關資訊。
+配置與佈署管理測試(Configuration and Deploy Management Testing)
+OTG-CONFIG-
+001
+Test Network/Infrastructure
+Configuration
+測試網路組態設定是否存在漏
+洞。
+- 9 -
+
+===== PAGE 10 =====
+
+OWASP 編號 OTG-CONFIG-
+002
+OTG-CONFIG-
+003
+OTG-CONFIG-
+004
+OTG-CONFIG-
+005
+OTG-CONFIG-
+006 OTG-CONFIG-
+007
+OTG-CONFIG-
+008 OTG-IDENT-
+001 OTG-IDENT-
+002 OTG-IDENT-
+003
+OTG-IDENT-
+004
+OTG-IDENT-
+005
+OTG-IDENT-
+006
+OTG-IDENT-
+007
+滲透測試初測結果分析及建議
+報告
+測試項目 檢測項目說明
+Test Application Platform
+Configuration
+測試應用程式平台的組態設定是
+否存在漏洞。
+Test File Extensions Handling
+for Sensitive Information
+測試文件擴展是否有洩漏敏感資
+訊。
+Backup and Unreferenced
+Files for Sensitive Information
+測試備份或引用文件是否有洩漏
+敏感資訊。
+Enumerate Infrastructure and
+Application Admin Interfaces Test HTTP Methods 測試管理員介面是否存在漏洞。
+測試HTTP 的方法是否有洩漏安全
+的風險存在。
+Test HTTP Strict Transport
+Security
+測試HSTS 的相關加密是否存在漏
+洞。
+Test RIA cross domain policy 測試 RIA 的跨 domain 策略是否有
+洩漏敏感資訊的漏洞。
+身分管理測試(Identity Management Testing)
+Test Role Definitions 測試系統定義不同使用者的功能
+與權限是否存在漏洞。
+Test Account Provisioning
+Process 測試帳戶設置過程。
+Test User Registration Process 測試帳號是否有被暴力破解的可
+能。
+測試使用者註冊過程。
+Testing for Account
+Enumeration and Guessable
+User Account
+Testing for Weak or
+unenforced username policy
+測試帳號錯誤時返回的訊息，是
+否有被利用的可能。
+Test Permissions of
+Guest/Training Accounts
+測試其評估 guest/Training 存取權
+限的模組與其認證是否存在漏
+洞。
+Test Account
+Suspension/Resumption
+Process
+測試用戶的註冊資訊是否符合安
+全需求。
+認證測試(Authentication Testing)
+- 10 -
+
+===== PAGE 11 =====
+
+OWASP 編號 OTG-AUTHN-
+001
+OTG-AUTHN-
+002 OTG-AUTHN-
+003
+OTG-AUTHN-
+004
+OTG-AUTHN-
+005
+OTG-AUTHN-
+006
+OTG-AUTHN-
+007
+OTG-AUTHN-
+008
+OTG-AUTHN-
+009
+OTG-AUTHN-
+010
+OTG-AUTHZ-
+001
+OTG-AUTHZ-
+002
+OTG-AUTHZ-
+003
+OTG-AUTHZ-
+004
+OTG-SESS-001 OTG-SESS-002 滲透測試初測結果分析及建議
+報告
+測試項目 檢測項目說明
+Testing for Credentials
+Transported over an Encrypted
+Channel
+測試帳號密碼傳輸是否走加密通
+道。
+Testing for default credentials 測試預設或常見的帳號密碼。
+Testing for Weak lock out
+mechanism 測試防止暴力破解機制。
+Testing for bypassing
+authentication schema 測試規避認證機制。
+Test remember password
+functionality Testing for Browser cache
+weakness 測試記憶密碼功能。
+測試Browser 快取是否有漏洞。
+Testing for Weak password
+policy Testing for Weak security
+question/answer
+測試密碼是否為弱密碼。
+測試密碼相關問題時，確認其答
+案有足夠的安全性。
+Testing for weak password
+change or reset functionalities
+測試變更或重置密碼時，是否有
+漏洞存在。
+Testing for Weaker
+authentication in alternative
+channel
+測試認證機制是否有其他替代性
+通道的漏洞。
+權限管理測試(Authorization Testing)
+Testing Directory traversal/file
+include
+測試目錄走訪或是檔案引入漏
+洞。
+Testing for Privilege
+Escalation
+Testing for bypassing
+authorization schema 測試繞過驗證授權機制。
+測試用戶權限是否有非法提升的
+漏洞。
+Testing for Insecure Direct
+Object References
+測試資料輸入部分是否有直接存
+取系統資料的漏洞。
+Session 管理測試(Session Management Testing)
+Testing for Bypassing Session
+Management Schema
+測試 Session 管理是否有規避的漏
+洞。
+Testing for Cookies attributes 測試是否存在 Cookies attributes 漏
+洞。
+- 11 -
+
+===== PAGE 12 =====
+
+OWASP 編號 OTG-SESS-003 OTG-SESS-004 OTG-SESS-005 OTG-SESS-006 OTG-SESS-007 OTG-SESS-008 OTG-INPVAL-
+001
+OTG-INPVAL-
+002
+OTG-INPVAL-
+003
+OTG-INPVAL-
+004
+OTG-INPVAL-
+005 OTG-INPVAL-
+006 OTG-INPVAL-
+007 OTG-INPVAL-
+008 OTG-INPVAL-
+009 OTG-INPVAL-
+010 滲透測試初測結果分析及建議
+報告
+測試項目 檢測項目說明
+Testing for Session Fixation 測試是否存在 Session Fixation 漏
+洞。
+Testing for Exposed Session
+Variables
+測試 Session 變數是否有暴露的漏
+洞。
+Testing for Cross Site Request
+Forgery Testing for logout functionality 測試是否有CSRF 攻擊的漏洞。
+測試 Session Termination 的安全
+性。
+Testing for Session Timeout 測試已經過時效的 Session 是否有
+被重用的漏洞。
+Testing for Session puzzling 測試是否存在 Session 變數過載漏
+洞。
+輸入認證測試(Input Validation Testing)
+Testing for Reflected Cross
+Site Scripting
+檢測是否存在 Reflected XSS 漏
+洞。
+Testing for Stored Cross Site
+Scripting 檢測是否存在 Stored XSS 漏洞。
+Testing for HTTP Verb
+Tampering
+測試HTTP 傳輸中自定義的傳輸動
+詞。
+Testing for HTTP Parameter
+pollution
+測試重複的HTTP 参數是否存在攻
+擊者繞過驗證的可能。
+Testing for SQL Injection 檢測是否存在SQL Injection 漏洞。
+Testing for NoSQL injection 檢測是否存在 NoSQL Injection 漏
+洞。
+Testing for LDAP Injection 檢測是否存在 LDAP Injection 漏
+洞。
+Testing for ORM Injection 檢測是否存在 ORM Injection 漏
+洞。
+Testing for XML Injection 檢測是否存在 XML Injection 漏
+洞。
+Testing for SSI Injection 檢測是否存在 SSI Injection 漏洞。
+Testing for XPath Injection 檢測是否存在 XPath Injection 漏
+洞。
+- 12 -
+
+===== PAGE 13 =====
+
+OWASP 編號 OTG-INPVAL-
+011 OTG-INPVAL-
+012 OTG-INPVAL-
+013 OTG-INPVAL-
+014 OTG-INPVAL-
+015
+OTG-INPVAL-
+016
+OTG-ERR-001 OTG-ERR-002 OTG-CRYPST-
+001
+OTG-CRYPST-
+002 滲透測試初測結果分析及建議
+報告
+測試項目 檢測項目說明
+IMAP/SMTP Injection 檢 測 是 否 存 在 IMAP/SMTP
+Injection 漏洞。
+Testing for Code Injection 檢測是否存在 Code Injection 漏
+洞。
+Testing for Local File
+Inclusion
+檢測是否存在 Local File Inclusion
+漏洞。
+Testing for Remote File
+Inclusion 檢測是否存在File Inclusion 漏洞。
+Testing for Command Injection 檢測是否存在 Command Inclusion
+漏洞。
+Testing for Buffer overflow 檢測是否存在 Buffer overflow 漏
+洞。
+Testing for Heap overflow 檢測是否存在 Heap overflow 漏
+洞。
+Testing for Stack overflow 檢測是否存在 Stack overflow 漏
+洞。
+Testing for Format string 檢測是否存在 Format string 漏洞。
+Testing for incubated
+vulnerabilities
+檢 測 是 否 存 在 Incubated
+vulnerability 漏洞。
+Testing for HTTP
+Splitting/Smuggling
+檢 測 是 否 存 在 HTTP Splitting,
+Smuggling 漏洞。
+錯誤處理(Error Handling)
+Analysis of Error Codes 分析錯誤頁面中的系統訊息，包
+含DB 的欄位分析。
+Analysis of Stack Traces 分析堆疊資訊，研判是否有攻擊
+者留下的痕跡。
+密碼 (Cryptography)
+Testing for Weak SSL/TSL
+Ciphers, Insufficient Transport
+Layer Protection
+Testing for Padding Oracle 測試不同類型資訊的傳輸，是否
+有通過HTTP 的可能。
+測試 padding oracle 是否有敏感資
+訊洩漏的問題。
+- 13 -
+
+===== PAGE 14 =====
+
+OWASP 編號 OTG-CRYPST-
+003
+OTG-
+BUSLOGIC-
+001
+OTG-
+BUSLOGIC-
+002
+OTG-
+BUSLOGIC-
+003
+OTG-
+BUSLOGIC-
+004
+OTG-
+BUSLOGIC-
+005
+OTG-
+BUSLOGIC-
+006
+OTG-
+BUSLOGIC-
+007
+OTG-
+BUSLOGIC-
+008
+OTG-
+BUSLOGIC-
+009
+OTG-CLIENT-
+001
+OTG-CLIENT-
+002
+滲透測試初測結果分析及建議
+報告
+測試項目 檢測項目說明
+Testing for Sensitive
+information sent via
+unencrypted channels
+商業邏輯測試(Business Logic Testing)
+測試敏感資訊的傳送是否有不受
+加密的通道。
+Test Business Logic Data
+Validation 測試商業邏輯資料的驗證。
+Test Ability to Forge Requests 測試外部是否有發送 Forge 請求的
+漏洞。
+Test Integrity Checks 測試程序邏輯上的完整性是否有
+漏洞。
+Test for Process Timing 測試系統流程上是否為操作上的
+漏洞。
+Test Number of Times a
+Function Can be Used Limits
+測試函數的使用,這些函數都擁有
+次數上的限制,而測試指使用者可
+否規避或利用這些限制。
+Testing for the Circumvention
+of Work Flows
+測試系統工作流程的順序於觸發
+條件是否有漏洞。
+Test Defenses Against
+Application Mis-use
+測試應用程式誤用的情況下是否
+有其主動防禦的措施。
+Test Upload of Unexpected
+File Types
+測試上傳檔案是否有類型的限制
+已避免上傳其他非預期檔案造成
+系統漏洞。
+Test Upload of Malicious Files
+測試上傳的檔案即使是規定的檔
+案類型，是否有偵測文件是否含
+有惡意程式或安全漏洞的機制。
+客戶端測試(Client Side Testing)
+Testing for DOM based Cross
+Site Scripting
+測試是否有基於 DOM 的 XSS 漏
+洞。
+Testing for JavaScript
+Execution
+測試 JavaScript 的執行上是否有漏
+洞。
+- 14 -
+
+===== PAGE 15 =====
+
+滲透測試初測結果分析及建議
+報告
+OWASP 編號 測試項目 檢測項目說明
+OTG-CLIENT-
+003 Testing for HTML Injection 測試是否有 HTML 注入的漏洞。
+OTG-CLIENT-
+004
+Testing for Client Side URL
+Redirect
+測試客戶端 URL 導向是否有驗證
+機制。
+OTG-CLIENT-
+005 Testing for CSS Injection 測試是否有CSS 注入的漏洞。
+OTG-CLIENT-
+006
+OTG-CLIENT-
+007
+OTG-CLIENT-
+008 Testing for Client Side
+Resource Manipulation
+Test Cross Origin Resource
+Sharing 測試是否有CORS 的漏洞。
+Testing for Cross Site Flashing 測試是否有Flash 上的漏洞。
+測試是否有客戶端資源處理的漏
+洞。
+OTG-CLIENT-
+009 Testing for Clickjacking 測試是否有Clickjacking 的漏洞。
+OTG-CLIENT-
+010 Testing Web Sockets 測試是否有Web Socket 的漏洞。
+OTG-CLIENT-
+011 Test Web Messaging 測試是否有Web Message 的漏洞。
+OTG-CLIENT-
+012 Test Local Storage 測試 Local 端是否有儲存敏感資訊
+的cookie 等漏洞。
+- 15 -
+
+===== PAGE 16 =====
+
+滲透測試初測結果分析及建議
+報告
+(二) 安全風險等級標準
+本標準是依據作業系統或設備及網頁存在之弱點/漏洞，由本團
+隊綜合相關資訊安全知識、證據及經驗，參酌風險評估方法論 ，分別就弱
+點/漏洞之可利用度、常見程度、偵測難度等面向，評估攻擊成功的
+可能性 (Likelihood)，進行安全風險分級，以利，如下表所示。
+表2 表安全風險等級表
+等級 安全風險描述
+嚴重風險 具有可被立即入侵、服務中斷或機密資料洩漏
+的 風險。
+高風險 可能具有被入侵、服務中斷或機密資料洩漏的
+風險。
+中風險 具有可輔佐或間接用於入侵之風險，或洩漏資
+料之等級不高。
+低風險 潛在威脅，未來可能提升為中高風險。
+資訊 不造成風險，為提示有此狀況或紀錄。
+- 16 -
+
+===== PAGE 17 =====
+
+滲透測試初測結果分析及建議
+報告
+第參章、 滲透測試作業執行結果報告
+一、滲透測試結果摘要
+本次滲透測試結果：
+共發現 1 個風險漏洞，其中 0 個嚴重風險、0 個高風險、0 個中
+風險、1 個低風險、0 個資訊，各受測標的漏洞數量、風險等級、漏洞
+名稱，以及漏洞分佈列表如下所示。
+弱點等級分佈圖
+0% 0% 0%
+0%
+嚴重
+高
+中
+低
+資訊
+100%
+表3 滲透測試之結果風險分布圖
+風險等級 初測數量
+嚴重風險 0
+高風險 0
+中風險 0
+低風險 1
+資訊 0
+- 17 -
+
+===== PAGE 18 =====
+
+滲透測試初測結果分析及建議
+報告
+二、風險弱點清單
+編號 弱點名稱 網址(URL) 風險等級 初測
+數量
+1
+HTTP 嚴格傳輸安全
+(HSTS) 標頭未設定
+⚫ https://inbr.pic.net.tw/com
+ponents/ footer.html 低 1
+表4 風險弱點表
+- 18 -
+
+===== PAGE 19 =====
+
+滲透測試初測結果分析及建議
+報告
+三、OWASP Top10 – 2025對照表
+此規範檢測是測試貴單位網站上可被發現的風險弱點清單，對照OWASP
+Top 10 – 2025年版的 Compliance 項目所作之比較。
+OWASP Top 10 – 2025 通過/未通過數量
+A1 Broken Access Control-權限控制失效 通過 N/A
+A2 Security Misconfiguration-安全設定錯誤
+未通過
+⚫ HTTP 嚴格傳輸安
+全 (HSTS) 標頭未
+設定
+A3 Software Supply Chain Failures-軟體供應
+鏈缺失 通過 N/A
+A4 Cryptographic Failure-加密機制失效 通過 N/A
+A5 Injection-注入式攻擊 通過 N/A
+A6 Insecure Design-不安全設計 通過 N/A
+A7 Authentication Failures-認證機制失效 通過 N/A
+A8 Software or Data Integrity Failures-軟體
+及資料完整性失效 通過 N/A
+A9 Logging and Alerting Failures-記錄與警
+示機制失效 通過 N/A
+A10 Mishandling of Exceptional Conditions-
+特殊情況處理不當 通過 N/A
+表5 OWASP Top 10 – 2021
+- 19 -
+
+===== PAGE 20 =====
+
+滲透測試初測結果分析及建議
+報告
+四、滲透測試詳細過程及內容
+(一) HTTP 嚴格傳輸安全（HSTS）標頭未設定
+弱點名稱 HTTP 嚴格傳輸安全（HSTS）標頭未設定 (低風險)
+弱點說明
+網站未設定 HTTP 嚴格傳輸安全（HTTP Strict Transport Security,
+HSTS）標頭，瀏覽器無法得知該網站應強制使用 HTTPS 進行連
+線。
+當使用者首次存取網站或透過 HTTP 連結進入網站時，攻擊者可能
+利用中間人攻擊（Man-in-the-Middle, MitM）或 SSL Stripping 等技
+術，將使用者導向未加密的 HTTP 連線，進而攔截、竄改或竊取傳
+輸資料，降低網站通訊安全性並增加敏感資訊外洩風險。
+問題網址 https://inbr.pic.net.tw/components/ footer.html
+HTTP Method GET
+問題參數
+測試語法
+1. 發現 Response Header 並未加上 HSTS
+初測測試截圖
+修補建議
+1. 建議於網站伺服器或反向代理設備中啟用 HTTP 嚴格傳輸安全
+（HTTP Strict Transport Security, HSTS）機制。
+2. 設定 Strict-Transport-Security 回應標頭，強制使用者瀏覽器僅
+透過 HTTPS 連線存取網站。
+3. 設定適當的 max-age 期限，以確保瀏覽器於指定期間內套用
+- 20 -
+
+===== PAGE 21 =====
+
+滲透測試初測結果分析及建議
+報告
+HSTS 政策。
+4. 若確認所有子網域皆已支援 HTTPS，可加入
+includeSubDomains 參數，以擴大 HSTS 保護範圍。
+5. 確認網站所有 HTTP 服務皆已正確導向 HTTPS，避免因轉址設
+定不完整造成安全風險。
+- 21 -
+
+===== PAGE 22 =====
+
+滲透測試初測結果分析及建議
+報告
+第肆章、 結論與建議
+(一) 於本次滲透測試服務中，針對受測目標網站共發現 1 個風險漏
+洞，其中 0 個嚴重風險、0 個高風險漏洞、0 個中風險漏洞、1
+個低風險漏洞、0 個資訊。建議您應依照上述修補建議儘速加
+以修補，以免 貴單位資訊系統受駭。
+(二) 資訊安全可以經過系統化的檢測與專家經驗的輔助來降低風險
+指數，但資訊安全漏洞層出不窮，近幾年惡意程式碼數量與變
+化更是大幅增加，駭客手法也日新月異，本項檢測僅表示於檢
+測時間點上是有效的，即使使用當前所有之安全檢測技術進行
+測試，仍需定期執行才能有效地確保安全。
+== end of document ==
+- 22 -

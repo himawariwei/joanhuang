@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 220 82" role="img" aria-labelledby="title">
+  <title id="title">更多社區服務</title>
+  <rect width="220" height="82" fill="none"/>
+  <circle cx="78" cy="41" r="23" fill="#eef7ff"/>
+  <path d="M66 45h24v18H66zM61 44l17-15 17 15" fill="none" stroke="#47917a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="142" y="38" text-anchor="middle" font-family="Arial,'Microsoft JhengHei',sans-serif" font-size="22" font-weight="700" fill="#47917a">社區服務</text>
+  <text x="142" y="59" text-anchor="middle" font-family="Arial,'Microsoft JhengHei',sans-serif" font-size="14" font-weight="700" fill="#ff6513">更多夥伴</text>
+</svg>
